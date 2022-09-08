@@ -52,18 +52,18 @@ def resample(itk_image: sitk.Image,
 
 label_classes = {
     1: 'Spleen',
-    2: 'Right Kidney',
+    2: 'Right Kidney',  # Not in Pancreas-CT
     3: 'Left Kidney',
     4: 'Gallbladder',
     5: 'Esophagus',
     6: 'Liver',
     7: 'Stomach',
-    8: 'Aorta',
-    9: 'Inferior Vena Cava',
-    10: 'Portal and Splenic Vein',
+    8: 'Aorta',  # Not in Pancreas-CT
+    9: 'Inferior Vena Cava',  # Not in Pancreas-CT
+    10: 'Portal and Splenic Vein',  # Not in Pancreas-CT
     11: 'Pancreas',
-    12: 'Right Adrenal Gland',
-    13: 'left Adrenal Gland',
+    12: 'Right Adrenal Gland',  # Not in Pancreas-CT
+    13: 'left Adrenal Gland',  # Not in Pancreas-CT
     14: 'Duodenum',
 }
 
@@ -142,7 +142,7 @@ if __name__ == "__main__":
     # Resample mask to original spacing (if required) and copy image header
     pred_itk = sitk.GetImageFromArray(logits.astype('int16'))
     if not args['isotropic']:
-        if args['verbose']: print(f'Resampling mask to to {image_itk_orig.GetSpacing()}...')
+        if args['verbose']: print(f'Resampling mask to: {image_itk_orig.GetSpacing()}...')
         pred_itk = resample(pred_itk, new_spacing=image_itk_orig.GetSpacing(), method=sitk.sitkNearestNeighbor)
     pred_itk.CopyInformation(image_itk_orig)
 

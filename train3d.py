@@ -1,7 +1,7 @@
 import os
 os.environ['TF_FORCE_GPU_ALLOW_GROWTH'] = 'true'
 os.environ['CUDA_DEVICE_ORDER'] = 'PCI_BUS_ID'   # see issue #152
-os.environ['CUDA_VISIBLE_DEVICES'] = '2'
+os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 
 import SimpleITK as sitk
 import tensorflow as tf
@@ -17,29 +17,28 @@ epochs = 2000
 batch_size = 4
 patch_size = 128
 learning_rate = 1e-4
-n_classes = 14
-
-# # Set dataset directory
-# data_root = '/vol/biodata/data/BTCV/Abdomen/IsotropicData/Training'
-# files = ['0001', '0002', '0003', '0004', '0005', '0006', '0007', '0008', '0009', '0010',
-#          '0021', '0022', '0023', '0024', '0025', '0026', '0027', '0028', '0029', '0030',
-#          '0031', '0032', '0033', '0034', '0035', '0036', '0037', '0038', '0039', '0040']
-# train_images = [os.path.join(data_root, f'img/img{file}.nii.gz') for file in files[:25]]
-# train_labels = [os.path.join(data_root, f'label/label{file}.nii.gz') for file in files[:25]]
-# test_images = [os.path.join(data_root, f'img/img{file}.nii.gz') for file in files[25:]]
-# test_labels = [os.path.join(data_root, f'label/label{file}.nii.gz') for file in files[25:]]
 
 # Set dataset directory
-data_root = '/vol/biodata/data/Pancreas-CT/isotropic'
-files = ['0002', '0003', '0004', '0005', '0006', '0007', '0008', '0009', '0010', '0011',
-         '0012', '0013', '0014', '0016', '0017', '0018', '0019', '0020', '0021', '0022',
-         '0024', '0026', '0027', '0028', '0029', '0030', '0031', '0032', '0033', '0034',
-         '0035', '0038', '0039', '0040', '0041', '0042', '0043', '0044', '0045', '0046',
-         '0047', '0048']
-train_images = [os.path.join(data_root, f'image/PANCREAS_{file}.nii.gz') for file in files[:35]]
-train_labels = [os.path.join(data_root, f'label/label{file}.nii.gz') for file in files[:35]]
-test_images = [os.path.join(data_root, f'image/PANCREAS_{file}.nii.gz') for file in files[35:]]
-test_labels = [os.path.join(data_root, f'label/label{file}.nii.gz') for file in files[35:]]
+data_root = '/vol/biodata/data/BTCV/Abdomen/IsotropicData/Training'
+files = ['0001', '0002', '0003', '0004', '0005', '0006', '0007', '0008', '0009', '0010',
+         '0021', '0022', '0023', '0024', '0025', '0026', '0027', '0028', '0029', '0030',
+         '0031', '0032', '0033', '0034', '0035', '0036', '0037', '0038', '0039', '0040']
+train_images = [os.path.join(data_root, f'img/img{file}.nii.gz') for file in files[:25]]
+train_labels = [os.path.join(data_root, f'label/label{file}.nii.gz') for file in files[:25]]
+test_images = [os.path.join(data_root, f'img/img{file}.nii.gz') for file in files[25:]]
+test_labels = [os.path.join(data_root, f'label/label{file}.nii.gz') for file in files[25:]]
+
+# # Set dataset directory
+# data_root = '/vol/biodata/data/Pancreas-CT/isotropic'
+# files = ['0002', '0003', '0004', '0005', '0006', '0007', '0008', '0009', '0010', '0011',
+#          '0012', '0013', '0014', '0016', '0017', '0018', '0019', '0020', '0021', '0022',
+#          '0024', '0026', '0027', '0028', '0029', '0030', '0031', '0032', '0033', '0034',
+#          '0035', '0038', '0039', '0040', '0041', '0042', '0043', '0044', '0045', '0046',
+#          '0047', '0048']
+# train_images = [os.path.join(data_root, f'image/PANCREAS_{file}.nii.gz') for file in files[:35]]
+# train_labels = [os.path.join(data_root, f'label/label{file}.nii.gz') for file in files[:35]]
+# test_images = [os.path.join(data_root, f'image/PANCREAS_{file}.nii.gz') for file in files[35:]]
+# test_labels = [os.path.join(data_root, f'label/label{file}.nii.gz') for file in files[35:]]
 
 a=1
 
@@ -109,7 +108,7 @@ a=1
 
 # Code adapted from "Generalized dice loss for multi-class segmentation"
 # https://github.com/keras-team/keras/issues/9395#issuecomment-370971561
-def dice_coef(y_true, y_pred, num_classes=15, smooth=1e-7):
+def dice_coef(y_true, y_pred, num_classes=14, smooth=1e-7):
     '''
     Dice coefficient function; ignores background pixel label 0
     Pass to model as metric during compile statement
@@ -134,12 +133,12 @@ def combined_loss(y_true, y_pred, alpha=0.5):
 
 
 
-# from residual_unet import get_network
-#
-# widths = [16, 32, 48, 64]
-# block_depth = 4
-# model = get_network((None, None, None, 1), widths, block_depth, n_classes=15)
-model = tf.keras.models.load_model('checkpoints/3dresunet.tf', compile=False)
+from residual_unet import get_network
+
+widths = [16, 32, 48, 64]
+block_depth = 4
+model = get_network((None, None, None, 1), widths, block_depth, n_classes=14)
+# model = tf.keras.models.load_model('checkpoints/3dresunet.tf', compile=False)
 
 
 
@@ -148,9 +147,9 @@ a=1
 
 
 # Train with combined Binary Crossentropy and Dice Loss
-csv_logger = tf.keras.callbacks.CSVLogger(f'logs/training_dice.log')
+csv_logger = tf.keras.callbacks.CSVLogger(f'logs/training_btcv.log')
 checkpoint = tf.keras.callbacks.ModelCheckpoint(
-    filepath=f'checkpoints/3dresunet_fine2.tf',
+    filepath=f'checkpoints/3dresunet_btcv.tf',
     monitor='val_dice_coef', mode='max', verbose=1,
     save_best_only=True)
 model.compile(
