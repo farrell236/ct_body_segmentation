@@ -1,0 +1,141 @@
+# Validation results for model 'checkpoints/3dresunet_fine2.tf' trained on Pancreas-CT dataset (2000 epochs)
+
+ssh://bh1511@calliope.doc.ic.ac.uk:22/vol/medic01/users/bh1511/_venv/python37/bin/python3 -u /homes/bh1511/.pycharm_helpers/pydev/pydevd.py --multiprocess --qt-support=auto --client 127.0.0.1 --port 54847 --file /vol/medic01/users/bh1511/PyCharm_Deployment/BodySegmenter/eval3d.py
+Connected to pydev debugger (build 221.6008.17)
+2022-09-08 16:13:18.536221: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:975] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2022-09-08 16:13:18.556753: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:975] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2022-09-08 16:13:18.557225: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:975] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2022-09-08 16:13:18.558380: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2022-09-08 16:13:18.559352: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:975] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2022-09-08 16:13:18.559637: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:975] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2022-09-08 16:13:18.559889: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:975] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2022-09-08 16:13:19.094274: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:975] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2022-09-08 16:13:19.094469: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:975] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2022-09-08 16:13:19.094625: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:975] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2022-09-08 16:13:19.094722: W tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:42] Overriding orig_value setting because the TF_FORCE_GPU_ALLOW_GROWTH environment variable is set. Original config value was 0.
+2022-09-08 16:13:19.094758: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1532] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 22222 MB memory:  -> device: 0, name: NVIDIA RTX A5000, pci bus id: 0000:02:00.0, compute capability: 8.6
+WARNING:tensorflow:Unable to restore custom metric. Please ensure that the layer implements `get_config` and `from_config` when saving. In addition, please use the `custom_objects` arg when calling `load_model()`.
+--- Running eval on PANCREAS_0042.nii.gz ---
+  0%|                                                    | 0/27 [00:00<?, ?it/s]2022-09-08 16:13:36.619742: I tensorflow/stream_executor/cuda/cuda_blas.cc:1786] TensorFloat-32 will be used for the matrix multiplication. This will only be logged once.
+2022-09-08 16:13:37.199850: I tensorflow/stream_executor/cuda/cuda_dnn.cc:384] Loaded cuDNN version 8201
+100%|███████████████████████████████████████████| 27/27 [00:08<00:00,  3.16it/s]
+100%|███████████████████████████████████████████| 15/15 [00:55<00:00,  3.68s/it]
+Spleen: 0.943242
+Right Kidney: 0.000000
+Left Kidney: 0.908239
+Gallbladder: 0.850058
+Esophagus: 0.603429
+Liver: 0.963549
+Stomach: 0.923492
+Aorta: 0.000000
+Inferior Vena Cava: 0.000000
+Portal and Splenic Vein: 0.000000
+Pancreas: 0.692056
+Right Adrenal Gland: 0.000000
+left Adrenal Gland: 0.000000
+Duodenum: 0.526461
+--- Running eval on PANCREAS_0043.nii.gz ---
+100%|███████████████████████████████████████████| 32/32 [00:06<00:00,  4.82it/s]
+100%|███████████████████████████████████████████| 15/15 [00:59<00:00,  3.93s/it]
+Spleen: 0.942408
+Right Kidney: 0.000000
+Left Kidney: 0.935022
+Gallbladder: 0.845055
+Esophagus: 0.674415
+Liver: 0.943290
+Stomach: 0.914804
+Aorta: 0.000000
+Inferior Vena Cava: 0.000000
+Portal and Splenic Vein: 0.000000
+Pancreas: 0.778347
+Right Adrenal Gland: 0.000000
+left Adrenal Gland: 0.000000
+Duodenum: 0.619149
+--- Running eval on PANCREAS_0044.nii.gz ---
+100%|███████████████████████████████████████████| 50/50 [00:10<00:00,  4.72it/s]
+100%|███████████████████████████████████████████| 15/15 [01:34<00:00,  6.32s/it]
+Spleen: 0.974013
+Right Kidney: 0.000000
+Left Kidney: 0.945979
+Gallbladder: 0.885740
+Esophagus: 0.693094
+Liver: 0.967794
+Stomach: 0.916602
+Aorta: 0.000000
+Inferior Vena Cava: 0.000000
+Portal and Splenic Vein: 0.000000
+Pancreas: 0.710425
+Right Adrenal Gland: 0.000000
+left Adrenal Gland: 0.000000
+Duodenum: 0.398492
+--- Running eval on PANCREAS_0045.nii.gz ---
+100%|███████████████████████████████████████████| 32/32 [00:06<00:00,  4.80it/s]
+100%|███████████████████████████████████████████| 15/15 [01:06<00:00,  4.46s/it]
+Spleen: 0.967574
+Right Kidney: 0.000000
+Left Kidney: 0.952459
+Gallbladder: 0.902435
+Esophagus: 0.700276
+Liver: 0.969733
+Stomach: 0.927303
+Aorta: 0.000000
+Inferior Vena Cava: 0.000000
+Portal and Splenic Vein: 0.000000
+Pancreas: 0.777910
+Right Adrenal Gland: 0.000000
+left Adrenal Gland: 0.000000
+Duodenum: 0.758915
+--- Running eval on PANCREAS_0046.nii.gz ---
+100%|███████████████████████████████████████████| 32/32 [00:06<00:00,  4.80it/s]
+100%|███████████████████████████████████████████| 15/15 [00:57<00:00,  3.86s/it]
+Spleen: 0.895158
+Right Kidney: 0.000000
+Left Kidney: 0.953715
+Gallbladder: 0.829748
+Esophagus: 0.354468
+Liver: 0.964041
+Stomach: 0.926460
+Aorta: 0.000000
+Inferior Vena Cava: 0.000000
+Portal and Splenic Vein: 0.000000
+Pancreas: 0.681745
+Right Adrenal Gland: 0.000000
+left Adrenal Gland: 0.000000
+Duodenum: 0.420972
+--- Running eval on PANCREAS_0047.nii.gz ---
+100%|███████████████████████████████████████████| 32/32 [00:06<00:00,  4.80it/s]
+100%|███████████████████████████████████████████| 15/15 [00:59<00:00,  3.99s/it]
+Spleen: 0.957663
+Right Kidney: 0.000000
+Left Kidney: 0.939846
+Gallbladder: 0.880581
+Esophagus: 0.270362
+Liver: 0.967757
+Stomach: 0.952017
+Aorta: 0.000000
+Inferior Vena Cava: 0.000000
+Portal and Splenic Vein: 0.000000
+Pancreas: 0.706313
+Right Adrenal Gland: 0.000000
+left Adrenal Gland: 0.000000
+Duodenum: 0.576619
+--- Running eval on PANCREAS_0048.nii.gz ---
+100%|███████████████████████████████████████████| 32/32 [00:06<00:00,  4.79it/s]
+100%|███████████████████████████████████████████| 15/15 [01:05<00:00,  4.37s/it]
+Spleen: 0.964411
+Right Kidney: 0.000000
+Left Kidney: 0.960081
+Gallbladder: 0.908336
+Esophagus: 0.641024
+Liver: 0.969423
+Stomach: 0.938172
+Aorta: 0.000000
+Inferior Vena Cava: 0.000000
+Portal and Splenic Vein: 0.000000
+Pancreas: 0.820200
+Right Adrenal Gland: 0.000000
+left Adrenal Gland: 0.000000
+Duodenum: 0.740440
+
+Process finished with exit code 0
