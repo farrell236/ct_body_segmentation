@@ -73,25 +73,27 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Body Organ Segmentation for CT Images')
     parser.add_argument('-i', '--input_fn', help='Input CT Volume')
     parser.add_argument('-o', '--output_fn', help='Output Segmentation')
-    parser.add_argument('-m', '--model', help='Trained Model')
+    parser.add_argument('-m', '--model_fn', help='Trained Model')
     parser.add_argument('-minW', '--min_window', help='Intensity Window minimum value', default=-500.)
     parser.add_argument('-maxW', '--max_window', help='Intensity Window maximum value', default=500.)
-    parser.add_argument('-iso', '--isotropic', help='Input Volume is Isotropic', action='store_true', default=True)
+    parser.add_argument('-iso', '--isotropic', help='Input Volume is Isotropic', action='store_true', default=False)
     parser.add_argument('-p', '--patch_size', help='3D Patch Division (patch)', default=128)
     parser.add_argument('-s', '--stride', help='3D Patch Division (stride)', default=120)
-    parser.add_argument('-v', '--verbose', help='Verbose Output', action='store_true', default=True)
-    parser.add_argument('-b', '--batch_size', help='Inference Batch Size', default=8)
+    parser.add_argument('-v', '--verbose', help='Verbose Output', action='store_true', default=False)
+    parser.add_argument('-b', '--batch_size', help='Inference Batch Size', default=4)
     args = vars(parser.parse_args())
 
-    ##### Parameters
-    # image_file = '/vol/biodata/data/BTCV/Abdomen/IsotropicData/Testing/img/img0069.nii.gz'
-    # image_file = '/vol/biodata/data/Pancreas-CT/isotropic/image/PANCREAS_0042.nii.gz'
-    input_file = '/vol/biodata/data/Pancreas-CT/isotropic/image/PANCREAS_0047.nii.gz'
-    # input_file = '/vol/biodata/data/Pancreas-CT/Pancreas-CT-nifti/PANCREAS_0047.nii.gz'
-    model_file = 'checkpoints/3dresunet_fine2.tf'
+    ##### Debug Overrides
+    # args['input_fn'] = '/vol/biodata/data/BTCV/Abdomen/IsotropicData/Testing/img/img0069.nii.gz'
+    # args['input_fn'] = '/vol/biodata/data/Pancreas-CT/isotropic/image/PANCREAS_0042.nii.gz'
+    # args['input_fn'] = '/vol/biodata/data/Pancreas-CT/isotropic/image/PANCREAS_0047.nii.gz'
+    # args['input_fn'] = '/vol/biodata/data/Pancreas-CT/Pancreas-CT-nifti/PANCREAS_0047.nii.gz'
+    # args['model_fn'] = 'checkpoints/3dresunet_fine2.tf'
+    # args['isotropic'] = True
+    # args['verbose'] = True
 
     # Load ITK image
-    image_itk = image_itk_orig = sitk.ReadImage(input_file)
+    image_itk = image_itk_orig = sitk.ReadImage(args['input_fn'])
 
     # Resample image to isotropic (if required)
     if not args['isotropic']:
@@ -103,9 +105,9 @@ if __name__ == "__main__":
     image_arr = tf.image.convert_image_dtype(image_arr, tf.float32)[None, ..., None]
 
     # Load trained body segmentation model
-    model = tf.keras.models.load_model(model_file, compile=False)
+    model = tf.keras.models.load_model(args['model_fn'], compile=False)
     n_classes = model.output_shape[-1]
-    if args['verbose']: print(f'Loaded Segmentation Model: {model_file}')
+    if args['verbose']: print(f'Loaded Segmentation Model: {args["model_fn"]}')
 
     # Divide input volume into sub-patches
     image_shape = image_arr.shape
@@ -148,7 +150,7 @@ if __name__ == "__main__":
 
     # Save predicted segmentation mask to disk
     if args['output_fn'] is None:
-        fn, ext = os.path.basename(input_file).split('.', 1)
+        fn, ext = os.path.basename(args['input_fn']).split('.', 1)
         sitk.WriteImage(pred_itk, f'{fn}_mask.{ext}')
         if args['verbose']: print(f'Segmentation mask saved to: {fn}_mask.{ext}')
     else:
