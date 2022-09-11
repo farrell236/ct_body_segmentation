@@ -1,0 +1,96 @@
+# Validation results for model 'checkpoints/3dresunet_btcv.tf' trained on BTVC dataset (2000 epochs)
+# requires 48GB GPU to run
+
+(python37) bh1511@taitam:/vol/medic01/users/bh1511/PyCharm_Deployment/BodySegmenter$ CUDA_VISIBLE_DEVICES=1 python eval3d.py
+2022-09-11 18:53:09.871595: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 AVX512F FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2022-09-11 18:53:10.405509: W tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:42] Overriding orig_value setting because the TF_FORCE_GPU_ALLOW_GROWTH environment variable is set. Original config value was 0.
+2022-09-11 18:53:10.405558: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1532] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 42753 MB memory:  -> device: 0, name: Quadro RTX 8000, pci bus id: 0000:65:00.0, compute capability: 7.5
+WARNING:tensorflow:Unable to restore custom metric. Please ensure that the layer implements `get_config` and `from_config` when saving. In addition, please use the `custom_objects` arg when calling `load_model()`.
+--- Running eval on img0036.nii.gz ---
+  0%|                                                                                                                                                                                           | 0/80 [00:00<?, ?it/s]2022-09-11 18:53:37.238170: I tensorflow/stream_executor/cuda/cuda_dnn.cc:384] Loaded cuDNN version 8201
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 80/80 [00:52<00:00,  1.53it/s]
+  0%|                                                                                                                                                                                           | 0/14 [00:00<?, ?it/s]2022-09-11 18:54:31.869282: W tensorflow/core/framework/cpu_allocator_impl.cc:82] Allocation of 2684354560 exceeds 10% of free system memory.
+2022-09-11 18:54:42.017970: W tensorflow/core/framework/cpu_allocator_impl.cc:82] Allocation of 2684354560 exceeds 10% of free system memory.
+2022-09-11 18:54:52.546635: W tensorflow/core/framework/cpu_allocator_impl.cc:82] Allocation of 2684354560 exceeds 10% of free system memory.
+2022-09-11 18:55:03.600070: W tensorflow/core/framework/cpu_allocator_impl.cc:82] Allocation of 2684354560 exceeds 10% of free system memory.
+2022-09-11 18:55:16.302453: W tensorflow/core/framework/cpu_allocator_impl.cc:82] Allocation of 2684354560 exceeds 10% of free system memory.
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [02:54<00:00, 12.50s/it]
+Spleen: 0.794193
+Right Kidney: 0.943423
+Left Kidney: 0.950002
+Gallbladder: 0.685175
+Esophagus: 0.454252
+Liver: 0.911656
+Stomach: 0.882246
+Aorta: 0.806841
+Inferior Vena Cava: 0.687624
+Portal and Splenic Vein: 0.602075
+Pancreas: 0.548606
+Right Adrenal Gland: 0.159903
+left Adrenal Gland: 0.258470
+--- Running eval on img0037.nii.gz ---
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 45/45 [00:14<00:00,  3.07it/s]
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [01:52<00:00,  8.00s/it]
+Spleen: 0.903943
+Right Kidney: 0.925512
+Left Kidney: 0.922703
+Gallbladder: 0.823344
+Esophagus: 0.354953
+Liver: 0.942381
+Stomach: 0.828726
+Aorta: 0.864562
+Inferior Vena Cava: 0.829619
+Portal and Splenic Vein: 0.434450
+Pancreas: 0.799885
+Right Adrenal Gland: 0.053837
+left Adrenal Gland: 0.142847
+--- Running eval on img0038.nii.gz ---
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 125/125 [00:42<00:00,  2.92it/s]
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [05:07<00:00, 21.95s/it]
+Spleen: 0.777382
+Right Kidney: 0.897922
+Left Kidney: 0.923414
+Gallbladder: 0.371403
+Esophagus: 0.452047
+Liver: 0.885672
+Stomach: 0.517996
+Aorta: 0.875274
+Inferior Vena Cava: 0.764992
+Portal and Splenic Vein: 0.522555
+Pancreas: 0.749478
+Right Adrenal Gland: 0.208500
+left Adrenal Gland: 0.130624
+--- Running eval on img0039.nii.gz ---
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 100/100 [00:33<00:00,  2.95it/s]
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [04:28<00:00, 19.15s/it]
+Spleen: 0.958333
+Right Kidney: 0.909628
+Left Kidney: 0.903908
+Gallbladder: 0.699002
+Esophagus: 0.538581
+Liver: 0.957877
+Stomach: 0.882987
+Aorta: 0.832632
+Inferior Vena Cava: 0.847914
+Portal and Splenic Vein: 0.619815
+Pancreas: 0.793553
+Right Adrenal Gland: 0.228933
+left Adrenal Gland: 0.316388
+--- Running eval on img0040.nii.gz ---
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 80/80 [00:26<00:00,  2.98it/s]
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [03:33<00:00, 15.26s/it]
+Spleen: 0.902721
+Right Kidney: 0.948939
+Left Kidney: 0.949896
+Gallbladder: 0.539845
+Esophagus: 0.292311
+Liver: 0.922905
+Stomach: 0.884486
+Aorta: 0.708534
+Inferior Vena Cava: 0.632922
+Portal and Splenic Vein: 0.592311
+Pancreas: 0.717727
+Right Adrenal Gland: 0.171091
+left Adrenal Gland: 0.104502
+(python37) bh1511@taitam:/vol/medic01/users/bh1511/PyCharm_Deployment/BodySegmenter$
