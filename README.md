@@ -14,6 +14,7 @@ Tensorflow+Keras Abdominal CT Segmentation model trained on PancreasCT<sup>[1]</
   &nbsp;&nbsp;
 </p>
 
+
 ### Run Model
 ```
 usage: segmentbody3d.py [-h] [-i INPUT_FN] [-o OUTPUT_FN] [-m MODEL]
@@ -44,6 +45,7 @@ optional arguments:
                         Inference Batch Size
 
 ```
+
 
 ### Run Arguments
 
@@ -88,6 +90,7 @@ Dice Results on Evaluation Data:
 |            | Std  | 0.027 |  ---  | 0.017 | 0.030 | 0.176 | 0.009 | 0.013 |  ---  |  ---  |  ---  | 0.053 |  ---  |  ---  | 
 | BTCV       | Mean | 0.867 | 0.925 | 0.930 | 0.624 | 0.418 | 0.924 | 0.799 | 0.817 | 0.753 | 0.554 | 0.722 | 0.164 | 0.191 | 
 |            | Std  | 0.078 | 0.022 | 0.020 | 0.173 | 0.096 | 0.028 | 0.159 | 0.067 | 0.092 | 0.076 | 0.102 | 0.068 | 0.091 |
+
 
 ### Requirements
 
