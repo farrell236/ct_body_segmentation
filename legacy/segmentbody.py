@@ -27,8 +27,8 @@ if __name__ == '__main__':
 
     # Load ITK image
     # image_itk = image_itk_copy = sitk.ReadImage(args['input_fn'])
-    image_itk = image_itk_copy = sitk.ReadImage('/mnt/nas_houbb/users/Benjamin/data/BTCV/RawData/Testing/img/img0079.nii.gz')
-    image_itk = sitk.IntensityWindowing(image_itk, -1000., 400.)
+    image_itk = image_itk_copy = sitk.ReadImage('/vol/biodata/data/BTCV/Abdomen/RawData/Testing/img/img0079.nii.gz')
+    image_itk = sitk.IntensityWindowing(image_itk, -500., 500.)
     image_arr = sitk.GetArrayFromImage(image_itk).astype('uint8')
     image_arr = tf.image.convert_image_dtype(image_arr, tf.float32)[..., None]
 

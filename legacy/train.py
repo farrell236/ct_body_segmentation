@@ -7,16 +7,22 @@ import SimpleITK as sitk
 import tensorflow as tf
 
 from DeeplabV3Plus import DeeplabV3Plus
+from windowLevel import windowLevel
+
+import wandb
+from wandb.keras import WandbCallback
+
+wandb.init(project="BodySegmenter", entity="farrell236")
 
 
 # Training Parameters
 epochs = 1000
-batch_size = 16
+batch_size = 8
 buffer_size = 4000
 learning_rate = 1e-4
 
 # Set dataset directory
-data_root = '/mnt/nas_houbb/users/Benjamin/data/BTCV/RawData/Training'
+data_root = '/vol/biodata/data/BTCV/Abdomen/RawData/Training'
 files = ['0001', '0002', '0003', '0004', '0005', '0006', '0007', '0008', '0009', '0010',
          '0021', '0022', '0023', '0024', '0025', '0026', '0027', '0028', '0029', '0030',
          '0031', '0032', '0033', '0034', '0035', '0036', '0037', '0038', '0039', '0040']
@@ -31,9 +37,9 @@ def load_itk_volume(image_fn, label_fn):
 
     image_itk = sitk.ReadImage(bytes.decode(image_fn.numpy(), 'utf-8'))
     # image_itk = sitk.ReadImage(image_fn)
-    image_itk = sitk.IntensityWindowing(image_itk, -1000., 400.)
-    image_arr = sitk.GetArrayFromImage(image_itk).astype('uint8')[..., None]
-    image_arr = tf.image.convert_image_dtype(image_arr, tf.float32)
+    # image_itk = sitk.IntensityWindowing(image_itk, -500., 500.)
+    image_arr = sitk.GetArrayFromImage(image_itk).astype('float32')[..., None]
+    # image_arr = tf.image.convert_image_dtype(image_arr, tf.float32)
 
     label_itk = sitk.ReadImage(bytes.decode(label_fn.numpy(), 'utf-8'))
     # label_itk = sitk.ReadImage(label_fn)
@@ -102,17 +108,22 @@ a=1
 
 
 # Define DeepLabV3+ Model
-model = DeeplabV3Plus(image_size=(512, 512, 1), num_classes=14)
+# model = DeeplabV3Plus(image_size=(512, 512, 1), num_classes=14)
 # model = tf.keras.models.load_model('checkpoints/DeeplabV3Plus.tf')
+
+model = tf.keras.Sequential([
+    windowLevel(),
+    DeeplabV3Plus(image_size=(512, 512, 1), num_classes=14)
+])
 
 
 a=1
 
 
 # Train with combined Binary Crossentropy and Dice Loss
-csv_logger = tf.keras.callbacks.CSVLogger(f'logs/training_2d.log')
+csv_logger = tf.keras.callbacks.CSVLogger(f'logs/training_2d_win.log')
 checkpoint = tf.keras.callbacks.ModelCheckpoint(
-    filepath=f'checkpoints/DeeplabV3Plus.tf',
+    filepath=f'checkpoints/DeeplabV3Plus_win.tf',
     monitor='val_dice_coef', mode='max', verbose=1,
     save_best_only=True)
 model.compile(
@@ -123,4 +134,4 @@ model.fit(
     train_dataset,
     validation_data=valid_dataset,
     epochs=epochs,
-    callbacks=[checkpoint, csv_logger])
+    callbacks=[checkpoint, csv_logger, WandbCallback()])
